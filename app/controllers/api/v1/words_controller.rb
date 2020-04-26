@@ -1,6 +1,10 @@
 class Api::V1::WordsController < ApplicationController
   def show
-    word = WordsApi::V1::Client.new.random_words
-    render json: word
+    begin
+      word = WordsApi::V1::Client.new.random_word
+      render json: word
+    rescue
+      render json: {"status":"400", "error":"Bad Request"}
+    end
   end
 end

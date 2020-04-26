@@ -9,6 +9,15 @@ FactoryBot.define do
     "name #{n}"
   end
 
+  sequence(:title) do |n|
+    "name #{n}"
+  end
+
+  factory :instrumental do
+    title
+    track { "mycustomtrack.mp3" }
+  end
+
   factory :user do
     email
     name

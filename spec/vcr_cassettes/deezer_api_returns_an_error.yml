@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.deezer.com/search?q=thisisarandomsearchterm%20instrumental
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      P3p:
+      - policyref="/w3c/p3p.xml" CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"
+      X-Host:
+      - blm-web-29
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '21'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 26 Apr 2020 10:35:56 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dzr_uniq_id=dzr_uniq_id_frceb16ee0f6a803584eac6b71cdcc9dd71893b7; expires=Fri,
+        23-Oct-2020 10:35:56 GMT; Max-Age=15552000; path=/; domain=.deezer.com; secure
+      X-Org:
+      - FR
+    body:
+      encoding: UTF-8
+      string: '{"data":[],"total":0}'
+    http_version: null
+  recorded_at: Sun, 26 Apr 2020 10:35:56 GMT
+recorded_with: VCR 5.1.0
