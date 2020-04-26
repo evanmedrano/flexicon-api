@@ -1,16 +1,38 @@
 require 'rails_helper'
 
 describe "Api::V1::Instrumentals" do
+  describe "#index" do
+    it "returns all instrumental records" do
+      create(:instrumental)
+      create(:instrumental)
+
+      get api_v1_instrumentals_path
+
+      expect(parsed_response.length).to eq 2
+    end
+  end
+
   describe "#show" do
-    context "when an instrumental is found" do
+    context "when an instrumental is found in database" do
+      it "returns the correct record" do
+        VCR.use_cassette("finds instrumental in database") do
+          instrumental = create(:instrumental, title: "My song")
+
+          get api_v1_instrumental_path(instrumental)
+
+          expect(parsed_response["title"]).to eq "My song"
+        end
+      end
+    end
+
+    context "when an instrumental is found by search" do
       it "returns a successful request" do
         VCR.use_cassette("deezer api returns an instrumental") do
           search = "zeze"
 
-          get api_v1_instrumentals_path, params: { q: search }
-          parsed_body = JSON.parse(response.body)
-          first_instrumental_title = parsed_body["data"][0]["title"]
+          get api_v1_instrumental_path(search)
 
+          first_instrumental_title = parsed_response["data"][0]["title"]
           expect(first_instrumental_title).to eq "Zeze (Instrumental)"
         end
       end
@@ -21,11 +43,10 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("deezer api returns an error") do
           search = "thisisarandomsearchterm"
 
-          get api_v1_instrumentals_path, params: { q: search }
-          parsed_body = JSON.parse(response.body)
+          get api_v1_instrumental_path(search)
 
-          expect(parsed_body["status"]).to eq "404"
-          expect(parsed_body["error"]).to eq "Instrumental Not Found"
+          expect(parsed_response["status"]).to eq "404"
+          expect(parsed_response["error"]).to eq "Instrumental Not Found"
         end
       end
     end
@@ -63,11 +84,14 @@ describe "Api::V1::Instrumentals" do
           params = { title: "", track: "" }
 
           post api_v1_instrumentals_path, params: { instrumental: params }
-          parsed_response = JSON.parse(response.body)
 
           expect(parsed_response["message"]).to eq("unprocessable entity")
         end
       end
     end
+  end
+
+  def parsed_response
+    JSON.parse(response.body)
   end
 end
