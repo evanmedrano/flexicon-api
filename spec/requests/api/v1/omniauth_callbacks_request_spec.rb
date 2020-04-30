@@ -26,6 +26,18 @@ describe "Api::V1::OmniauthCallbacks" do
       end
     end
 
+    context "when the user's auth provider is set as google" do
+      it "logs in the user" do
+        user = create(:user, :with_google_auth)
+        stub_oauth(info: { email: user.email })
+
+        get "/api/v1/users/auth/facebook/callback"
+
+        expect(User.count).not_to eq 2
+        expect(response.body).to include "Facebook authentication successful."
+      end
+    end
+
     context "when the request is unsuccessful" do
       it "returns an error message" do
         get "/api/v1/users/auth/facebook/callback.json"
@@ -51,7 +63,19 @@ describe "Api::V1::OmniauthCallbacks" do
     context "when the user already exists" do
       it "logs in the user" do
         user = create(:user, email: "new_user@gmail.com")
-        stub_oauth(info: { email: user.email })
+        stub_oauth(provider: :google_oauth2, info: { email: user.email })
+
+        get "/api/v1/users/auth/google_oauth2/callback"
+
+        expect(User.count).not_to eq 2
+        expect(response.body).to include "Google authentication successful."
+      end
+    end
+
+    context "when the user's auth provider is set as facebook" do
+      it "logs in the user" do
+        user = create(:user, :with_facebook_auth)
+        stub_oauth(provider: :google_oauth2, info: { email: user.email })
 
         get "/api/v1/users/auth/google_oauth2/callback"
 
