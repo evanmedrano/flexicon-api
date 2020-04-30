@@ -4,4 +4,5 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist,
          :omniauth_providers => [:facebook, :google_oauth2]
 
+  validates :username, uniqueness: { case_sensitive: false }, allow_nil: true
 end
