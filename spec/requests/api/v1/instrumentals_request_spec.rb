@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "Api::V1::Instrumentals" do
   describe "#index" do
@@ -6,7 +6,7 @@ describe "Api::V1::Instrumentals" do
       create(:instrumental)
       create(:instrumental)
 
-      get api_v1_instrumentals_path
+      get "/api/v1/instrumentals"
 
       expect(parsed_response.length).to eq 2
     end
@@ -18,7 +18,7 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("finds instrumental in database") do
           instrumental = create(:instrumental, title: "My song")
 
-          get api_v1_instrumental_path(instrumental)
+          get "/api/v1/instrumentals/#{instrumental.id}"
 
           expect(parsed_response["title"]).to eq "My song"
         end
@@ -30,7 +30,7 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("deezer api returns an instrumental") do
           search = "zeze"
 
-          get api_v1_instrumental_path(search)
+          get "/api/v1/instrumentals/#{search}"
 
           first_instrumental_title = parsed_response["data"][0]["title"]
           expect(first_instrumental_title).to eq "Zeze (Instrumental)"
@@ -43,7 +43,7 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("deezer api returns an error") do
           search = "thisisarandomsearchterm"
 
-          get api_v1_instrumental_path(search)
+          get "/api/v1/instrumentals/#{search}"
 
           expect(parsed_response["status"]).to eq "404"
           expect(parsed_response["error"]).to eq "Instrumental Not Found"
@@ -58,7 +58,7 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("new instrumental record is saved") do
           params = { title: "Zeze (Instrumental)", track: "zeze.mp3" }
 
-          post api_v1_instrumentals_path, params: { instrumental: params  }
+          post "/api/v1/instrumentals", params: { instrumental: params  }
 
           expect(Instrumental.count).to eq 1
         end
@@ -71,7 +71,7 @@ describe "Api::V1::Instrumentals" do
           create(:instrumental, title: "Zeze (Instrumental)")
           params = { title: "ZeZe (instrumental)", track: "zeze.mp3" }
 
-          post api_v1_instrumentals_path, params: { instrumental: params }
+          post "/api/v1/instrumentals", params: { instrumental: params }
 
           expect(Instrumental.count).not_to eq 2
         end
@@ -83,7 +83,7 @@ describe "Api::V1::Instrumentals" do
         VCR.use_cassette("returns an error for invalid params") do
           params = { title: "", track: "" }
 
-          post api_v1_instrumentals_path, params: { instrumental: params }
+          post "/api/v1/instrumentals", params: { instrumental: params }
 
           expect(parsed_response["message"]).to eq("unprocessable entity")
         end

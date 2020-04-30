@@ -1,6 +1,10 @@
 FactoryBot.use_parent_strategy = false
 
 FactoryBot.define do
+  factory :jwt_blacklist do
+    jti "MyString"
+    exp "2020-04-30 15:58:46"
+  end
   sequence(:email) do |n|
     "user#{n}@example.com"
   end

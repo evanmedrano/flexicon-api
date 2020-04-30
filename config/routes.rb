@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
-  # devise_for :users,
-  # controllers: { :omniauth_callbacks => 'omniauth_callbacks' }
-
-  namespace :api do
-    namespace :v1 do
+  scope module: 'api', path: 'api' do
+    scope module: 'v1', path: 'v1' do
       devise_for :users,
-      controllers: { :omniauth_callbacks => 'api/v1/omniauth_callbacks' }
+      path: '',
+      path_names: {
+        'sign_in': 'login',
+        'sign_out': 'logout',
+        'registration': 'signup'
+      },
+      controllers: {
+        omniauth_callbacks: 'api/v1/omniauth_callbacks',
+        registrations: 'api/v1/registrations',
+        sessions: 'api/v1/sessions'
+      }
 
       resources :instrumentals, only: [:index, :show, :create]
       resource :words, only: [:show]
     end
   end
-
 end
