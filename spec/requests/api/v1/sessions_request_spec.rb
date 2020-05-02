@@ -50,7 +50,7 @@ describe "Api::V1::Sessions" do
 
   def decoded_jwt_token_from_response(response)
     token_from_request = response.headers['Authorization'].split(' ').last
-    jwt_secret_key = Rails.application.credentials.config[:secret_key_base]
+    jwt_secret_key = ENV['DEVISE_JWT_SECRET_KEY']
 
     JWT.decode(token_from_request, jwt_secret_key, true)
   end

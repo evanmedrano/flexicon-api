@@ -11,12 +11,14 @@ Devise.setup do |config|
   # config.secret_key = 'c5ccff379d138cc3e228b15f99b073821c7ede99c4325fa0d63b41bb1e9cf8e235179868bdb3ede861b0eafcdc7727ccb5b0d2eb5ce0bd3803880f7877ac92d4'
 
   config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.config[:secret_key_base]
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.dispatch_requests = [
-      ['POST', %r{^/login$}]
+      ['POST', %r{^/api/v1/login$}],
+      ['GET', %r{^/api/v1/auth/facebook/callback$}],
+      ['GET', %r{^/api/v1/auth/google_oauth2/callback$}]
     ]
     jwt.revocation_requests = [
-      ['DELETE', %r{^/logout$}]
+      ['DELETE', %r{^/api/v1/logout$}]
     ]
     jwt.expiration_time = 1.day.to_i
   end

@@ -12,6 +12,14 @@ describe "Api::V1::OmniauthCallbacks" do
         expect(User.last.email).to eq "new_user@gmail.com"
         expect(response.body).to include "Facebook authentication successful."
       end
+
+      it "returns JWT token in authorization header" do
+        stub_oauth(info: { email: "new_user@gmail.com" })
+
+        get "/api/v1/auth/facebook/callback"
+
+        expect(response.headers["Authorization"]).to be_present
+      end
     end
 
     context "when the user already exists" do
@@ -57,6 +65,14 @@ describe "Api::V1::OmniauthCallbacks" do
         expect(User.count).to eq 1
         expect(User.last.auth_provider).to eq "google_oauth2"
         expect(response.body).to include "Google authentication successful."
+      end
+
+      it "returns JWT token in authorization header" do
+        stub_oauth(info: { email: "new_user@gmail.com" })
+
+        get "/api/v1/auth/google_oauth2/callback"
+
+        expect(response.headers["Authorization"]).to be_present
       end
     end
 

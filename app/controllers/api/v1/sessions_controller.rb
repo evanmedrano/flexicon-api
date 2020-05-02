@@ -1,5 +1,6 @@
 module Api::V1
   class SessionsController < Devise::SessionsController
+    skip_before_action :verify_signed_out_user, only: :destroy
     respond_to :json
 
     private
