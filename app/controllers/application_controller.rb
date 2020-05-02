@@ -9,14 +9,13 @@ class ApplicationController < ActionController::API
 
   def validation_error(resource)
     render json: {
-      errors: [
+      errors:
         {
           status: '400',
           title: 'Bad Request',
-          detail: resource.errors,
+          detail: resource.errors.full_messages,
           code: '100'
         }
-      ]
     }, status: :bad_request
   end
 end

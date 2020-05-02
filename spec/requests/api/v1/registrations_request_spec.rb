@@ -26,7 +26,7 @@ describe "Api::V1::Registrations" do
       it "returns validation errors" do
         existing_user_signup
 
-        expect(parsed_response['errors'].first['title']).to eq('Bad Request')
+        expect(parsed_response['errors']['title']).to eq('Bad Request')
       end
     end
   end
