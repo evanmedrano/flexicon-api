@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe User do
+  context "associations" do
+    it { should have_many(:instrumental_likes) }
+    it { should have_many(:liked_instrumentals).through(:instrumental_likes) }
+  end
+
   context "validations" do
     context "presence" do
       it { should validate_presence_of(:email) }

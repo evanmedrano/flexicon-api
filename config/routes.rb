@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       }
 
       resources :instrumentals, only: [:index, :show, :create]
+      resources :instrumental_likes, only: [:index, :create, :destroy]
       resource :words, only: [:show]
     end
   end
