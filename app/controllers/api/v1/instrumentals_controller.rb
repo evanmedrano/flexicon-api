@@ -15,7 +15,7 @@ module Api::V1
         if instrumental_persisted? || search_yield_any_results?(instrumental)
           render json: instrumental
         else
-          render json: {"status":"404", "error":"Instrumental Not Found"}
+          render json: {"status":"404", "error":"No luck finding the beat"}
         end
       rescue
         render json: {"status":"400", "error":"Bad Request"}
