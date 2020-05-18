@@ -3,7 +3,7 @@ module Api::V1
     before_action :set_instrumental, only: [:show]
 
     def index
-      instrumentals = Instrumental.all
+      instrumentals = Instrumental.all.order("id ASC")
 
       render json: instrumentals
     end
