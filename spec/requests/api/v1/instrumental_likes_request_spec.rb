@@ -62,9 +62,11 @@ describe 'Api::V1::InstrumentalLikes' do
     it 'returns one less liked instrumental for the user' do
       user = create(:user)
       instrumental_like = create(:instrumental_like, user: user)
+      instrumental = instrumental_like.instrumental
 
-      delete "/api/v1/instrumental_likes/#{instrumental_like.id}",
+      delete "/api/v1/instrumental_likes/#{instrumental.id}",
              headers: authorize(user)
+
 
       expect(user.liked_instrumentals.count).to eq 0
     end

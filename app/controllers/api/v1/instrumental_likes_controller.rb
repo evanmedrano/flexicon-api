@@ -1,8 +1,8 @@
 module Api::V1
   class InstrumentalLikesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_instrumental_like, only: [:destroy]
-    before_action :liked_by_current_user?, only: [:destroy]
+    before_action :set_instrumental_like, only: %i[destroy]
+    before_action :liked_by_current_user?, only: %i[destroy]
 
     def index
       instrumentals =
@@ -37,13 +37,16 @@ module Api::V1
     end
 
     def set_instrumental_like
-      @instrumental_like = InstrumentalLike.find_by(id: params[:id])
+      instrumental = Instrumental.find_by(id: params[:id])
+
+      @instrumental_like =
+        InstrumentalLike.find_by(user: current_user, instrumental: instrumental)
     end
 
     def liked_by_current_user?
       if @instrumental_like.user != current_user
         render json: { status: 401, message: 'Unauthorized' },
-          status: :unauthorized
+               status: :unauthorized
       end
     end
   end

@@ -26,7 +26,7 @@ module Api::V1
       instrumental = DeezerApi::V1::Client.new(instrumental_params)
 
       if instrumental.save
-        render json: {"status":"201", "message": "created"}
+        render json: instrumental, status: :created
       else
         render json: {"status":"422", "message": "unprocessable entity"}
       end
