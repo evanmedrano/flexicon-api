@@ -5,12 +5,10 @@ module Api::V1
     before_action :liked_by_current_user?, only: %i[destroy]
 
     def index
-      instrumentals =
-        Instrumental.joins(:instrumental_likes).where(
-          instrumental_likes: { user: current_user }
-        )
+      instrumental_likes =
+        InstrumentalLike.where(user: current_user).order('created_at DESC')
 
-      render json: instrumentals
+      render json: instrumental_likes
     end
 
     def create
