@@ -1,7 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Instrumental.create!([
+  { title: 'Forgot About Dre', track: 'https://cdns-preview-1.dzcdn.net/stream/c-1d1fbfce5143a19115cac98fbd2d1f0c-7.mp3' },
+  { title: 'Jumpman', track: 'https://cdns-preview-1.dzcdn.net/stream/c-1e9e086fd1191ec747d9d0534c01d618-10.mp3' },
+  { title: 'Through The Wire', track: 'https://cdns-preview-6.dzcdn.net/stream/c-66163efc324084d1b34b285c4fe07759-5.mp3' },
+  { title: 'Put You On The Game', track: 'https://cdns-preview-c.dzcdn.net/stream/c-c6361b58b765c01937198abe3b24ae4f-3.mp3' },
+  { title: "Nuthing But a 'G' Thang", track: 'https://cdns-preview-5.dzcdn.net/stream/c-5c5a07fa662ca4e43db0779bd10ae03f-3.mp3' },
+  { title: 'In Da Club', track: 'https://cdns-preview-5.dzcdn.net/stream/c-52aaf4ed983e08fe6c1c7c40e3173f11-7.mp3' },
+  { title: "Grindin'", track: 'https://cdns-preview-d.dzcdn.net/stream/c-df23750899b76575a4e4fb8a276ddb48-6.mp3' },
+  { title: 'Day n Nite', track: 'https://cdns-preview-3.dzcdn.net/stream/c-3ebb8b161c80cbab245e2492c3bb48ae-8.mp3' },
+  { title: 'Who Shot Ya', track: 'https://cdns-preview-7.dzcdn.net/stream/c-784e76e50460a1eefa46c4356ee66807-3.mp3' },
+  { title: 'Big Poppa', track: 'https://cdns-preview-a.dzcdn.net/stream/c-a7c158eb742a71c6a1be3da7f7bfa147-3.mp3' },
+  { title: 'Ambitionz Az A Ridah', track: 'https://cdns-preview-f.dzcdn.net/stream/c-fef8918829b4a757387e6ea798d3049b-3.mp3' },
+  { title: 'I Got 5 On It', track: 'https://cdns-preview-d.dzcdn.net/stream/c-da9651d3f3b8589aa788d934945aa11b-6.mp3' },
+  { title: 'Empire State of Mind', track: 'https://cdns-preview-2.dzcdn.net/stream/c-25019ba7f07aa77105e4d02907703d75-1.mp3' },
+  { title: 'Give It To Me', track: 'https://cdns-preview-a.dzcdn.net/stream/c-aeb81ba344bcbe1e96b0ca56cb18cce7-7.mp3' },
+  { title: 'ATLiens', track: 'https://cdns-preview-4.dzcdn.net/stream/c-4bfde22769b3da818240ca36d6a87c81-0.mp3' },
+  { title: 'Twinz', track: 'https://cdns-preview-a.dzcdn.net/stream/c-ae65fbc70b718cea6b5fd37feba032a2-2.mp3' },
+  { title: 'Shook Ones', track: 'https://cdns-preview-2.dzcdn.net/stream/c-2d5dce873d042e3fb0c3f8f7a0b3c757-3.mp3' },
+  { title: "Drop It Like It's Hot", track: 'https://cdns-preview-a.dzcdn.net/stream/c-a65fcaaf4174bb9e771009dedfdf4c7a-2.mp3' },
+  { title: 'Still Dre', track: 'https://cdns-preview-d.dzcdn.net/stream/c-d7324decaf67e45a423a5a3fbecfe075-6.mp3' },
+  { title: 'Marvins Room', track: 'https://cdns-preview-f.dzcdn.net/stream/c-fdf04a92b63b3c167a40eb6d96bbf367-1.mp3' },
+  { title: 'Lean Back', track: 'https://cdns-preview-4.dzcdn.net/stream/c-487cdc6915084ab98233f9a97c7cc6ba-3.mp3' },
+  { title: 'Zeze', track: 'https://cdns-preview-3.dzcdn.net/stream/c-3f0aad31dc2f49522f707665d159d9e3-2.mp3' }
+])
