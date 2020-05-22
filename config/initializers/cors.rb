@@ -7,7 +7,7 @@
 
  Rails.application.config.middleware.insert_before 0, Rack::Cors do
    allow do
-     origins 'flexicon-frontend.herokuapp.com/'
+     origins 'https://flexicon-frontend.herokuapp.com/'
 
      resource '*',
        headers: :any,
